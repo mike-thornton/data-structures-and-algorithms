@@ -1,0 +1,19 @@
+# Xcode
+
+## Build generated
+build/
+DerivedData
+
+## User settings
+xcuserdata/
+
+## App packaging
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+## Playgrounds
+timeline.xctimeline
+playground.xcworkspace
+
+.DS_Store
