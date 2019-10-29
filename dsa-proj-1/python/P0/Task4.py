@@ -57,14 +57,9 @@ for callData in calls:
 		possibleTelemarketers.append(sender)
 		ignoreThese.append(sender) # ensure number is only added once
 
+possibleTelemarketers.sort()
+
 print("These numbers could be telemarketers:")
 print(*possibleTelemarketers, sep='\n')
 
-# Runtime complexity (Big-O): O(n)
-# 		Linear relationship to input volume.
-# 		While we are both iterating over the input data (texts, calls) multiple times,
-# 		as well as comparing values during each iteration,
-# 		the computation complexity remains linear.
-# 		This would not be the case if we were to, for example, 
-# 		loop through the calls, then within that loop, loop through the texts to check if 
-# 		a given number has ever sent or received a text message.
+# Runtime complexity (Big-O): O(n log n)
