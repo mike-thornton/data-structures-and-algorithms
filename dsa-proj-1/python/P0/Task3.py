@@ -87,12 +87,11 @@ for callData in calls:
 		if recipient not in areaCodes:
 			areaCodes.append(recipient)
 
+areaCodes.sort()
+
 print("The numbers called by people in Bangalore have codes:")
 print(*areaCodes, sep='\n')
 
 print(f'{((count/total)*100):.2f} percent of calls from fixed lines in Bangalore are calls to other fixed lines in Bangalore.')
 
-# Runtime complexity (Big-O): O(n)
-# 		Linear relationship to input volume.
-# 		While we are evaluating each input element multiple times, 
-# 		the computation complexity remains linear.
+# Runtime complexity (Big-O): O(n log(n))
