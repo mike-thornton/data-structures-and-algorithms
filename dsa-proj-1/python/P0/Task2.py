@@ -40,33 +40,26 @@ leaderTime = -1
 
 callTimes = {}
 
-def recordDuration(call, targetMonth, targetYear):
-	sender, recipient, duration, datetime = call['sender'], call['recipient'], call['duration'], call['datetime']
-	(dd, MM, yyyy, hh, mm, ss) = datetime
-
-	if MM == targetMonth and yyyy == targetYear: 
-		# update the call times dict
-		senderTime = duration if sender not in callTimes else duration + callTimes[sender]
-		recipientTime = duration if recipient not in callTimes else duration + callTimes[recipient]
-		callTimes[sender] = senderTime
-		callTimes[recipient] = recipientTime
-		
-		# update the current leader
-		global leaderTime, leader
-		if senderTime >= recipientTime and senderTime > leaderTime:
-			leader = sender
-			leaderTime = senderTime
-		elif recipientTime > leaderTime:
-			leader = recipient
-			leaderTime = recipientTime
+def recordDuration(call):
+	sender, recipient, duration = call['sender'], call['recipient'], call['duration']
+	# update the call times dict
+	senderTime = duration if sender not in callTimes else duration + callTimes[sender]
+	recipientTime = duration if recipient not in callTimes else duration + callTimes[recipient]
+	callTimes[sender] = senderTime
+	callTimes[recipient] = recipientTime
+	
+	# update the current leader
+	global leaderTime, leader
+	if senderTime >= recipientTime and senderTime > leaderTime:
+		leader = sender
+		leaderTime = senderTime
+	elif recipientTime > leaderTime:
+		leader = recipient
+		leaderTime = recipientTime
 
 for callData in calls:
-	targetMonth = '09'
-	targetYear = '2016'
-	recordDuration(phoneCall(callData), targetMonth, targetYear)
+	recordDuration(phoneCall(callData))
 
 print(f"{leader} spent the longest time, {leaderTime} seconds, on the phone during September 2016.")
 
 # Runtime complexity (Big-O): O(n)
-# 		Accessing each input element once
-
